@@ -24,7 +24,7 @@ SECRET_KEY = 'zgc&v1g2o37^1k2*td8b(i_rzdutudjfr-qat#q%oqm11-u(fb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['45.79.122.48','dr-mohsin-phd.com','www.dr-mohsin-phd.com']
+ALLOWED_HOSTS = ['13.127.42.224 ','newshunt.com','www.newshunt.com']
 
 # Application definition
 
