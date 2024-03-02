@@ -15,7 +15,7 @@ from manager.models import Manager
 import random
 import string
 from ipware import get_client_ip
-from ip2geotools.databases.noncommercial import DbIpCity
+# from ip2geotools.databases.noncommercial import DbIpCity
 from bs4 import BeautifulSoup
 from urllib import request as rq
 from django.http import JsonResponse
@@ -58,25 +58,25 @@ def about(request):
     trending = Trending.objects.all().order_by('-pk')[:5]
 
 
-    quotes_url = 'https://mohsinweb.herokuapp.com/quotes/'
-    connect = rq.urlopen(quotes_url)
-    page_html = connect.read()
-    connect.close()
-    parse_page = BeautifulSoup(page_html, 'html.parser')
-    heading = parse_page.h1.text.strip()
-    print(heading)
-    main_quotes = parse_page.find_all('div',{'class':'quotes'})
-    print(main_quotes)
+    # quotes_url = 'https://mohsinweb.herokuapp.com/quotes/'
+    # connect = rq.urlopen(quotes_url)
+    # page_html = connect.read()
+    # connect.close()
+    # parse_page = BeautifulSoup(page_html, 'html.parser')
+    # heading = parse_page.h1.text.strip()
+    # print(heading)
+    # main_quotes = parse_page.find_all('div',{'class':'quotes'})
+    # print(main_quotes)
 
-    for quotes_iter in main_quotes:
-        quote_p =  quotes_iter.find_all('p',{'class':'aquote'})
-        quote = quote_p[0].text.strip()
-        authors =  quotes_iter.find_all('p',{'class':'author'})
-        author = authors[0].text.strip()
-        print(quote, author)
+    # for quotes_iter in main_quotes:
+    #     quote_p =  quotes_iter.find_all('p',{'class':'aquote'})
+    #     quote = quote_p[0].text.strip()
+    #     authors =  quotes_iter.find_all('p',{'class':'author'})
+    #     author = authors[0].text.strip()
+    #     print(quote, author)
 
 
-    return render(request, 'front/about.html',{'name':article_var, 'News':news, 'cat': cat,'subcat':subcat, 'lastnews':lastnews, 'popularnews2':popularnews2,'trending':trending,'quote':quote,'author':author})
+    return render(request, 'front/about.html',{'name':article_var, 'News':news, 'cat': cat,'subcat':subcat, 'lastnews':lastnews, 'popularnews2':popularnews2,'trending':trending})
 
 def admin_panel(request):
 
@@ -192,13 +192,13 @@ def myregister(request):
             #
             # print(ip, ipv)
 
-            try:
-                response = DbIpCity.get(ip, api_key='free')
-                country = response.country+'|'+response.city
-            except:
-                'Unknown Region'
+            # try:
+            #     response = DbIpCity.get(ip, api_key='free')
+            #     country = response.country+'|'+response.city
+            # except:
+            #     'Unknown Region'
             user = User.objects.create_user(username=uname, email=email, password=password)
-            b = Manager(name=name,uname=uname, email=email,ip=ip, country=country)
+            b = Manager(name=name,uname=uname, email=email,ip=ip)
             b.save()
 
 
